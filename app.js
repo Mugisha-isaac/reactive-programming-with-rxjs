@@ -1,3 +1,4 @@
+// const {fromEvent} = rxjs;
 
 function print(val){
     let element = document.createElement('p');
@@ -10,7 +11,19 @@ function print(val){
     document.body.appendChild(element);
 }
 
-const observable = rxjs.Observable.create(observer => {
-    observer.next('semaphore');
+// const observable = rxjs.Observable.create(observer => {
+//     observer.next('semaphore');
+// });
+// observable.subscribe(val => print(val))
+
+// const clicks = rxjs.Observable.fromEvent(document,'click');
+// clicks.subscribe(val => console.log(val))
+
+const promise = new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+      resolve('resolved')
+    },1000)
 });
-observable.subscribe(val => print(val))
+
+const obsPromise = rxjs.from(promise);
+obsPromise.subscribe(result => print(result));
